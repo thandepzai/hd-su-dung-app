@@ -1,587 +1,1067 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hướng dẫn xử lý khi không xem được video trên Mapstudy</title>
-  <meta name="description" content="3 cách đơn giản giúp học sinh xem lại video trên Mapstudy: dùng 4G/5G, phần mềm 1.1.1.1 (Cloudflare WARP) và extension Urban VPN." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --ink: #14213d;
-      --ink-soft: #3d4a66;
-      --muted: #6b7793;
-      --line: #e6e9f2;
-      --surface: #ffffff;
-      --bg: #f4f6fb;
-      --bg-tint: #eef1f9;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hướng dẫn xử lý khi không xem được video trên Mapstudy</title>
+    <meta
+      name="description"
+      content="3 cách đơn giản giúp học sinh xem lại video trên Mapstudy: dùng 4G/5G, phần mềm 1.1.1.1 (Cloudflare WARP) và extension Urban VPN."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #14213d;
+        --ink-soft: #3d4a66;
+        --muted: #6b7793;
+        --line: #e6e9f2;
+        --surface: #ffffff;
+        --bg: #f4f6fb;
+        --bg-tint: #eef1f9;
 
-      --primary: #2f5bff;
-      --primary-deep: #1b3aa8;
-      --primary-tint: #e7edff;
+        --primary: #2f5bff;
+        --primary-deep: #1b3aa8;
+        --primary-tint: #e7edff;
 
-      --accent: #ff7a18;
-      --accent-tint: #fff0e3;
-      --green: #1aa05a;
-      --green-tint: #e3f6ec;
+        --accent: #ff7a18;
+        --accent-tint: #fff0e3;
+        --green: #1aa05a;
+        --green-tint: #e3f6ec;
 
-      --radius-lg: 22px;
-      --radius-md: 14px;
-      --radius-sm: 10px;
-      --shadow-card: 0 14px 40px -22px rgba(20, 33, 61, 0.45);
-      --shadow-soft: 0 4px 18px -10px rgba(20, 33, 61, 0.35);
+        --radius-lg: 22px;
+        --radius-md: 14px;
+        --radius-sm: 10px;
+        --shadow-card: 0 14px 40px -22px rgba(20, 33, 61, 0.45);
+        --shadow-soft: 0 4px 18px -10px rgba(20, 33, 61, 0.35);
 
-      --space-section: clamp(3.5rem, 2.5rem + 4vw, 6.5rem);
-      --maxw: 880px;
-      --ease: cubic-bezier(0.16, 1, 0.3, 1);
-    }
+        --space-section: clamp(3.5rem, 2.5rem + 4vw, 6.5rem);
+        --maxw: 880px;
+        --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      }
 
-    * { box-sizing: border-box; }
+      * {
+        box-sizing: border-box;
+      }
 
-    html { scroll-behavior: smooth; }
+      html {
+        scroll-behavior: smooth;
+      }
 
-    body {
-      margin: 0;
-      font-family: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", sans-serif;
-      color: var(--ink);
-      background: var(--bg);
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-    }
+      body {
+        margin: 0;
+        font-family:
+          "Be Vietnam Pro",
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          sans-serif;
+        color: var(--ink);
+        background: var(--bg);
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
 
-    a { color: var(--primary-deep); text-decoration-color: rgba(47, 91, 255, 0.35); text-underline-offset: 3px; }
-    a:hover { text-decoration-color: var(--primary); }
+      a {
+        color: var(--primary-deep);
+        text-decoration-color: rgba(47, 91, 255, 0.35);
+        text-underline-offset: 3px;
+      }
+      a:hover {
+        text-decoration-color: var(--primary);
+      }
 
-    .wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: 20px; }
+      .wrap {
+        width: 100%;
+        max-width: var(--maxw);
+        margin-inline: auto;
+        padding-inline: 20px;
+      }
 
-    /* ---------- Hero ---------- */
-    .hero {
-      position: relative;
-      overflow: hidden;
-      color: #fff;
-      background:
-        radial-gradient(120% 120% at 85% -10%, rgba(255, 122, 24, 0.55), transparent 55%),
-        radial-gradient(120% 130% at 0% 0%, rgba(95, 134, 255, 0.65), transparent 55%),
-        linear-gradient(160deg, #1b3aa8 0%, #14213d 100%);
-    }
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image: radial-gradient(rgba(255,255,255,0.10) 1px, transparent 1.4px);
-      background-size: 22px 22px;
-      mask-image: linear-gradient(to bottom, #000 0%, transparent 80%);
-      pointer-events: none;
-    }
-    .hero .wrap { position: relative; z-index: 1; padding-block: clamp(3.2rem, 2rem + 7vw, 6rem) clamp(3.4rem, 2rem + 6vw, 5.5rem); }
+      /* ---------- Hero ---------- */
+      .hero {
+        position: relative;
+        overflow: hidden;
+        color: #fff;
+        background:
+          radial-gradient(
+            120% 120% at 85% -10%,
+            rgba(255, 122, 24, 0.55),
+            transparent 55%
+          ),
+          radial-gradient(
+            120% 130% at 0% 0%,
+            rgba(95, 134, 255, 0.65),
+            transparent 55%
+          ),
+          linear-gradient(160deg, #1b3aa8 0%, #14213d 100%);
+      }
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(
+          rgba(255, 255, 255, 0.1) 1px,
+          transparent 1.4px
+        );
+        background-size: 22px 22px;
+        mask-image: linear-gradient(to bottom, #000 0%, transparent 80%);
+        pointer-events: none;
+      }
+      .hero .wrap {
+        position: relative;
+        z-index: 1;
+        padding-block: clamp(3.2rem, 2rem + 7vw, 6rem)
+          clamp(3.4rem, 2rem + 6vw, 5.5rem);
+      }
 
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      padding: 7px 14px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.14);
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      backdrop-filter: blur(6px);
-    }
-    .badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px rgba(255,122,24,0.3); }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        padding: 7px 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.14);
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        backdrop-filter: blur(6px);
+      }
+      .badge .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 0 4px rgba(255, 122, 24, 0.3);
+      }
 
-    .hero h1 {
-      font-size: clamp(1.9rem, 1rem + 5vw, 3.4rem);
-      line-height: 1.08;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      margin: 22px 0 0;
-      max-width: 18ch;
-    }
-    .hero h1 .hl { color: #ffd9b8; }
-    .hero p.lead {
-      font-size: clamp(1.02rem, 0.95rem + 0.5vw, 1.2rem);
-      color: rgba(255, 255, 255, 0.82);
-      margin: 18px 0 0;
-      max-width: 46ch;
-    }
+      .hero h1 {
+        font-size: clamp(1.9rem, 1rem + 5vw, 3.4rem);
+        line-height: 1.08;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        margin: 22px 0 0;
+        max-width: 18ch;
+      }
+      .hero h1 .hl {
+        color: #ffd9b8;
+      }
+      .hero p.lead {
+        font-size: clamp(1.02rem, 0.95rem + 0.5vw, 1.2rem);
+        color: rgba(255, 255, 255, 0.82);
+        margin: 18px 0 0;
+        max-width: 46ch;
+      }
 
-    /* ---------- Method chooser ---------- */
-    .chooser { margin-top: 34px; display: grid; gap: 14px; grid-template-columns: repeat(3, 1fr); }
-    @media (max-width: 680px) { .chooser { grid-template-columns: 1fr; } }
+      /* ---------- Method chooser ---------- */
+      .chooser {
+        margin-top: 34px;
+        display: grid;
+        gap: 14px;
+        grid-template-columns: repeat(3, 1fr);
+      }
+      @media (max-width: 680px) {
+        .chooser {
+          grid-template-columns: 1fr;
+        }
+      }
 
-    .choice {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      padding: 18px 18px 20px;
-      border-radius: var(--radius-md);
-      background: rgba(255, 255, 255, 0.10);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      color: #fff;
-      text-decoration: none;
-      transition: transform 0.3s var(--ease), background 0.3s var(--ease), border-color 0.3s var(--ease);
-    }
-    .choice:hover { transform: translateY(-4px); background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.4); }
-    .choice .k { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #ffd9b8; }
-    .choice .t { font-weight: 700; font-size: 1.06rem; line-height: 1.3; }
-    .choice .d { font-size: 0.85rem; color: rgba(255,255,255,0.72); }
-    .choice .go { margin-top: auto; font-size: 0.85rem; font-weight: 600; color:#fff; opacity:.9; }
-    .choice .go::after { content: " →"; }
+      .choice {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding: 18px 18px 20px;
+        border-radius: var(--radius-md);
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        color: #fff;
+        text-decoration: none;
+        transition:
+          transform 0.3s var(--ease),
+          background 0.3s var(--ease),
+          border-color 0.3s var(--ease);
+      }
+      .choice:hover {
+        transform: translateY(-4px);
+        background: rgba(255, 255, 255, 0.18);
+        border-color: rgba(255, 255, 255, 0.4);
+      }
+      .choice .k {
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #ffd9b8;
+      }
+      .choice .t {
+        font-weight: 700;
+        font-size: 1.06rem;
+        line-height: 1.3;
+      }
+      .choice .d {
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.72);
+      }
+      .choice .go {
+        margin-top: auto;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #fff;
+        opacity: 0.9;
+      }
+      .choice .go::after {
+        content: " →";
+      }
 
-    /* ---------- Sections ---------- */
-    main { padding-block: var(--space-section); }
-    .method { margin-bottom: var(--space-section); scroll-margin-top: 24px; }
-    .method:last-child { margin-bottom: 0; }
+      /* ---------- Sections ---------- */
+      main {
+        padding-block: var(--space-section);
+      }
+      .method {
+        margin-bottom: var(--space-section);
+        scroll-margin-top: 24px;
+      }
+      .method:last-child {
+        margin-bottom: 0;
+      }
 
-    .m-head { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 12px; }
-    .m-num {
-      flex: none;
-      width: 52px; height: 52px;
-      display: grid; place-items: center;
-      border-radius: 16px;
-      font-weight: 800; font-size: 1.3rem;
-      color: #fff;
-      background: linear-gradient(150deg, var(--primary), var(--primary-deep));
-      box-shadow: var(--shadow-soft);
-    }
-    .method[data-tone="amber"] .m-num { background: linear-gradient(150deg, #ff9a3d, var(--accent)); }
-    .method[data-tone="green"] .m-num { background: linear-gradient(150deg, #34c97b, var(--green)); }
+      .m-head {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 12px;
+      }
+      .m-num {
+        flex: none;
+        width: 52px;
+        height: 52px;
+        display: grid;
+        place-items: center;
+        border-radius: 16px;
+        font-weight: 800;
+        font-size: 1.3rem;
+        color: #fff;
+        background: linear-gradient(
+          150deg,
+          var(--primary),
+          var(--primary-deep)
+        );
+        box-shadow: var(--shadow-soft);
+      }
+      .method[data-tone="amber"] .m-num {
+        background: linear-gradient(150deg, #ff9a3d, var(--accent));
+      }
+      .method[data-tone="green"] .m-num {
+        background: linear-gradient(150deg, #34c97b, var(--green));
+      }
 
-    .m-head h2 { font-size: clamp(1.4rem, 1rem + 2vw, 2rem); line-height: 1.15; letter-spacing: -0.01em; margin: 2px 0 4px; }
-    .m-head .sub { color: var(--muted); font-size: 0.95rem; margin: 0; }
+      .m-head h2 {
+        font-size: clamp(1.4rem, 1rem + 2vw, 2rem);
+        line-height: 1.15;
+        letter-spacing: -0.01em;
+        margin: 2px 0 4px;
+      }
+      .m-head .sub {
+        color: var(--muted);
+        font-size: 0.95rem;
+        margin: 0;
+      }
 
-    .intro { margin: 0 0 18px; color: var(--ink-soft); font-size: 1rem; }
+      .intro {
+        margin: 0 0 18px;
+        color: var(--ink-soft);
+        font-size: 1rem;
+      }
 
-    .tag {
-      display: inline-block; margin-top: 6px;
-      font-size: 0.74rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
-      padding: 4px 11px; border-radius: 999px;
-      background: var(--primary-tint); color: var(--primary-deep);
-    }
-    .method[data-tone="amber"] .tag { background: var(--accent-tint); color: #b4520a; }
-    .method[data-tone="green"] .tag { background: var(--green-tint); color: #0d7a40; }
+      .tag {
+        display: inline-block;
+        margin-top: 6px;
+        font-size: 0.74rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        padding: 4px 11px;
+        border-radius: 999px;
+        background: var(--primary-tint);
+        color: var(--primary-deep);
+      }
+      .method[data-tone="amber"] .tag {
+        background: var(--accent-tint);
+        color: #b4520a;
+      }
+      .method[data-tone="green"] .tag {
+        background: var(--green-tint);
+        color: #0d7a40;
+      }
 
-    /* ---------- Steps ---------- */
-    .steps { list-style: none; margin: 24px 0 0; padding: 0; position: relative; }
-    .step {
-      position: relative;
-      padding-left: 56px;
-      padding-bottom: 34px;
-    }
-    .step:last-child { padding-bottom: 0; }
-    .step::before {
-      content: "";
-      position: absolute; left: 17px; top: 6px; bottom: -6px;
-      width: 2px; background: var(--line);
-    }
-    .step:last-child::before { display: none; }
-    .step .s-num {
-      position: absolute; left: 0; top: 0;
-      width: 36px; height: 36px;
-      display: grid; place-items: center;
-      border-radius: 50%;
-      font-weight: 700; font-size: 0.95rem;
-      color: var(--primary-deep);
-      background: var(--surface);
-      border: 2px solid var(--primary);
-      z-index: 1;
-    }
-    .method[data-tone="amber"] .step .s-num { color: #b4520a; border-color: var(--accent); }
+      /* ---------- Steps ---------- */
+      .steps {
+        list-style: none;
+        margin: 24px 0 0;
+        padding: 0;
+        position: relative;
+      }
+      .step {
+        position: relative;
+        padding-left: 56px;
+        padding-bottom: 34px;
+      }
+      .step:last-child {
+        padding-bottom: 0;
+      }
+      .step::before {
+        content: "";
+        position: absolute;
+        left: 17px;
+        top: 6px;
+        bottom: -6px;
+        width: 2px;
+        background: var(--line);
+      }
+      .step:last-child::before {
+        display: none;
+      }
+      .step .s-num {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 36px;
+        height: 36px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        font-weight: 700;
+        font-size: 0.95rem;
+        color: var(--primary-deep);
+        background: var(--surface);
+        border: 2px solid var(--primary);
+        z-index: 1;
+      }
+      .method[data-tone="amber"] .step .s-num {
+        color: #b4520a;
+        border-color: var(--accent);
+      }
 
-    .step h3 { margin: 4px 0 6px; font-size: 1.12rem; line-height: 1.4; }
-    .step p { margin: 0 0 4px; color: var(--ink-soft); }
-    .step p:last-of-type { margin-bottom: 0; }
-    .kbd {
-      display: inline-block;
-      padding: 1px 8px; border-radius: 7px;
-      background: var(--bg-tint); border: 1px solid var(--line);
-      font-weight: 600; font-size: 0.9em; color: var(--ink);
-      white-space: nowrap;
-    }
+      .step h3 {
+        margin: 4px 0 6px;
+        font-size: 1.12rem;
+        line-height: 1.4;
+      }
+      .step p {
+        margin: 0 0 4px;
+        color: var(--ink-soft);
+      }
+      .step p:last-of-type {
+        margin-bottom: 0;
+      }
+      .kbd {
+        display: inline-block;
+        padding: 1px 8px;
+        border-radius: 7px;
+        background: var(--bg-tint);
+        border: 1px solid var(--line);
+        font-weight: 600;
+        font-size: 0.9em;
+        color: var(--ink);
+        white-space: nowrap;
+      }
 
-    /* ---------- Card / plain method ---------- */
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-lg);
-      padding: clamp(20px, 1rem + 3vw, 36px);
-      box-shadow: var(--shadow-card);
-    }
+      /* ---------- Card / plain method ---------- */
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius-lg);
+        padding: clamp(20px, 1rem + 3vw, 36px);
+        box-shadow: var(--shadow-card);
+      }
 
-    .quick {
-      display: flex; align-items: center; gap: 18px;
-      background: linear-gradient(135deg, var(--accent-tint), #fff);
-      border: 1px solid #ffe1c4;
-      border-radius: var(--radius-lg);
-      padding: clamp(20px, 1rem + 2vw, 30px);
-    }
-    .quick .ic { flex: none; font-size: 2rem; line-height: 1; }
-    .quick p { margin: 0; }
-    .quick strong { color: #b4520a; }
+      .quick {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        background: linear-gradient(135deg, var(--accent-tint), #fff);
+        border: 1px solid #ffe1c4;
+        border-radius: var(--radius-lg);
+        padding: clamp(20px, 1rem + 2vw, 30px);
+      }
+      .quick .ic {
+        flex: none;
+        font-size: 2rem;
+        line-height: 1;
+      }
+      .quick p {
+        margin: 0;
+      }
+      .quick strong {
+        color: #b4520a;
+      }
 
-    /* ---------- Images ---------- */
-    figure { margin: 14px 0 0; }
-    .shot {
-      display: block; width: 100%; height: auto;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--line);
-      background: #fcfcff;
-      box-shadow: var(--shadow-soft);
-      cursor: zoom-in;
-      transition: transform 0.3s var(--ease);
-    }
-    .shot:hover { transform: scale(1.012); }
-    .shot.sm { max-width: 320px; }
-    .shot.md { max-width: 480px; }
-    figcaption { margin-top: 8px; font-size: 0.82rem; color: var(--muted); }
-    .grid2 { display: grid; gap: 14px; grid-template-columns: 1fr 1fr; }
-    @media (max-width: 600px) { .grid2 { grid-template-columns: 1fr; } }
+      /* ---------- Images ---------- */
+      figure {
+        margin: 14px 0 0;
+      }
+      .shot {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--line);
+        background: #fcfcff;
+        box-shadow: var(--shadow-soft);
+        cursor: zoom-in;
+        transition: transform 0.3s var(--ease);
+      }
+      .shot:hover {
+        transform: scale(1.012);
+      }
+      .shot.sm {
+        max-width: 320px;
+      }
+      .shot.md {
+        max-width: 480px;
+      }
+      figcaption {
+        margin-top: 8px;
+        font-size: 0.82rem;
+        color: var(--muted);
+      }
+      .grid2 {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: 1fr 1fr;
+      }
+      @media (max-width: 600px) {
+        .grid2 {
+          grid-template-columns: 1fr;
+        }
+      }
 
-    /* ---------- Note ---------- */
-    .note {
-      margin-top: 16px;
-      display: flex; gap: 12px;
-      padding: 14px 16px;
-      border-radius: var(--radius-md);
-      background: var(--green-tint);
-      border: 1px solid #c2ebd2;
-      color: #0d5e35;
-      font-size: 0.95rem;
-    }
-    .note .ic { flex: none; }
-    .note strong { color: #0a4a29; }
+      /* ---------- Note ---------- */
+      .note {
+        margin-top: 16px;
+        display: flex;
+        gap: 12px;
+        padding: 14px 16px;
+        border-radius: var(--radius-md);
+        background: var(--green-tint);
+        border: 1px solid #c2ebd2;
+        color: #0d5e35;
+        font-size: 0.95rem;
+      }
+      .note .ic {
+        flex: none;
+      }
+      .note strong {
+        color: #0a4a29;
+      }
 
-    /* ---------- Alert / announcement ---------- */
-    .alert { padding-block: clamp(2rem, 1.4rem + 2vw, 3.2rem) 0; }
-    .alert-card {
-      background: linear-gradient(135deg, #fff7ed, var(--surface));
-      border: 1px solid #ffd9b0;
-      border-left: 5px solid var(--accent);
-      border-radius: var(--radius-lg);
-      padding: clamp(20px, 1rem + 2.5vw, 32px);
-      box-shadow: var(--shadow-card);
-    }
-    .alert-head { display: flex; align-items: flex-start; gap: 14px; }
-    .alert-ic { flex: none; font-size: 1.8rem; line-height: 1; }
-    .alert-kicker {
-      display: inline-block;
-      font-size: 0.74rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
-      padding: 3px 10px; border-radius: 999px;
-      background: var(--accent-tint); color: #b4520a;
-    }
-    .alert-head h2 { margin: 8px 0 0; font-size: clamp(1.2rem, 0.9rem + 1.4vw, 1.6rem); line-height: 1.25; color: var(--ink); }
-    .alert-figure { margin: 18px 0 0; }
-    .alert p { color: var(--ink-soft); margin: 14px 0 0; }
-    .alert .alert-cta { font-weight: 600; color: var(--ink); }
+      /* ---------- Alert / announcement ---------- */
+      .alert {
+        padding-block: clamp(2rem, 1.4rem + 2vw, 3.2rem) 0;
+      }
+      .alert-card {
+        background: linear-gradient(135deg, #fff7ed, var(--surface));
+        border: 1px solid #ffd9b0;
+        border-left: 5px solid var(--accent);
+        border-radius: var(--radius-lg);
+        padding: clamp(20px, 1rem + 2.5vw, 32px);
+        box-shadow: var(--shadow-card);
+      }
+      .alert-head {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+      }
+      .alert-ic {
+        flex: none;
+        font-size: 1.8rem;
+        line-height: 1;
+      }
+      .alert-kicker {
+        display: inline-block;
+        font-size: 0.74rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 3px 10px;
+        border-radius: 999px;
+        background: var(--accent-tint);
+        color: #b4520a;
+      }
+      .alert-head h2 {
+        margin: 8px 0 0;
+        font-size: clamp(1.2rem, 0.9rem + 1.4vw, 1.6rem);
+        line-height: 1.25;
+        color: var(--ink);
+      }
+      .alert-figure {
+        margin: 18px 0 0;
+      }
+      .alert p {
+        color: var(--ink-soft);
+        margin: 14px 0 0;
+      }
+      .alert .alert-cta {
+        font-weight: 600;
+        color: var(--ink);
+      }
 
-    /* ---------- Footer ---------- */
-    footer {
-      border-top: 1px solid var(--line);
-      background: var(--surface);
-      padding-block: 30px;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-    footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; justify-content: space-between; }
-    footer a { font-weight: 600; }
+      /* ---------- Footer ---------- */
+      footer {
+        border-top: 1px solid var(--line);
+        background: var(--surface);
+        padding-block: 30px;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+      footer .wrap {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 20px;
+        align-items: center;
+        justify-content: space-between;
+      }
+      footer a {
+        font-weight: 600;
+      }
 
-    /* ---------- Lightbox ---------- */
-    .lb {
-      position: fixed; inset: 0; z-index: 50;
-      display: none; place-items: center;
-      padding: 24px;
-      background: rgba(10, 16, 33, 0.86);
-      backdrop-filter: blur(4px);
-      cursor: zoom-out;
-    }
-    .lb.open { display: grid; }
-    .lb img { max-width: 100%; max-height: 90vh; border-radius: 12px; box-shadow: 0 30px 80px -20px rgba(0,0,0,0.7); }
-    .lb-close {
-      position: fixed; top: 18px; right: 20px;
-      width: 42px; height: 42px; border-radius: 50%;
-      border: none; cursor: pointer;
-      background: rgba(255,255,255,0.16); color: #fff;
-      font-size: 1.4rem; line-height: 1;
-    }
+      /* ---------- Lightbox ---------- */
+      .lb {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        display: none;
+        place-items: center;
+        padding: 24px;
+        background: rgba(10, 16, 33, 0.86);
+        backdrop-filter: blur(4px);
+        cursor: zoom-out;
+      }
+      .lb.open {
+        display: grid;
+      }
+      .lb img {
+        max-width: 100%;
+        max-height: 90vh;
+        border-radius: 12px;
+        box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.7);
+      }
+      .lb-close {
+        position: fixed;
+        top: 18px;
+        right: 20px;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        background: rgba(255, 255, 255, 0.16);
+        color: #fff;
+        font-size: 1.4rem;
+        line-height: 1;
+      }
 
-    @media (prefers-reduced-motion: reduce) {
-      * { scroll-behavior: auto !important; transition: none !important; }
-    }
-  </style>
-</head>
-<body>
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          scroll-behavior: auto !important;
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="alert" aria-labelledby="alert-heading">
+      <div class="wrap">
+        <div class="alert-card">
+          <div class="alert-head">
+            <span class="alert-ic">⚠️</span>
+            <div>
+              <span class="alert-kicker">Thông báo</span>
+              <h2 id="alert-heading">
+                Ngày 24 có một số học sinh gặp lỗi không xem được video như sau
+              </h2>
+            </div>
+          </div>
+          <figure class="alert-figure">
+            <img
+              class="shot"
+              loading="eager"
+              src="images/error.png"
+              alt="Màn hình báo lỗi không phát được video trên Mapstudy"
+              width="1907"
+              height="976"
+            />
+            <figcaption>Màn hình lỗi mà một số bạn gặp phải.</figcaption>
+          </figure>
+          <p>
+            Nguyên nhân là do đường truyền mạng ở một số khu vực không ổn định,
+            khiến video không tải và phát được. Đây không phải lỗi từ tài khoản
+            hay bài học của bạn.
+          </p>
+          <p class="alert-cta">
+            Sau đây Mapstudy sẽ hướng dẫn mọi người cách khắc phục.
+          </p>
+        </div>
+      </div>
+    </section>
 
-  <section class="alert" aria-labelledby="alert-heading">
-    <div class="wrap">
-      <div class="alert-card">
-        <div class="alert-head">
-          <span class="alert-ic">⚠️</span>
+    <header class="hero">
+      <div class="wrap">
+        <span class="badge"
+          ><span class="dot"></span> Hỗ trợ học sinh Mapstudy</span
+        >
+        <h1>
+          Không xem được video? <span class="hl">Xử lý trong 1 phút.</span>
+        </h1>
+        <p class="lead">
+          Đôi khi video bị chặn do đường truyền mạng. Dưới đây là
+          <strong>3 cách</strong> đơn giản giúp bạn vào học lại bình thường —
+          chọn cách phù hợp nhất với bạn.
+        </p>
+
+        <nav class="chooser" aria-label="Chọn cách xử lý">
+          <a class="choice" href="#cach-1">
+            <span class="k">Cách 1</span>
+            <span class="t">Dùng 4G / 5G</span>
+            <span class="d">Nhanh nhất, không cài đặt gì</span>
+            <span class="go">Xem ngay</span>
+          </a>
+          <a class="choice" href="#cach-2">
+            <span class="k">Cách 2</span>
+            <span class="t">Phần mềm 1.1.1.1</span>
+            <span class="d">Cloudflare WARP cho máy tính</span>
+            <span class="go">Xem ngay</span>
+          </a>
+          <a class="choice" href="#cach-3">
+            <span class="k">Cách 3</span>
+            <span class="t">Extension Urban VPN</span>
+            <span class="d"
+              >Tiện ích cho Chrome &amp; trình duyệt Chromium</span
+            >
+            <span class="go">Xem ngay</span>
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <!-- ============ CÁCH 1 ============ -->
+      <section class="method" id="cach-1" data-tone="amber">
+        <div class="m-head">
+          <div class="m-num">1</div>
           <div>
-            <span class="alert-kicker">Thông báo</span>
-            <h2 id="alert-heading">Ngày 24 có một số học sinh gặp lỗi không xem được video như sau</h2>
+            <h2>Sử dụng 4G / 5G để học</h2>
+            <p class="sub">Cách nhanh nhất, không cần cài đặt phần mềm.</p>
+            <span class="tag">Dễ nhất</span>
           </div>
         </div>
-        <figure class="alert-figure">
-          <img class="shot" loading="eager" src="images/error.png" alt="Màn hình báo lỗi không phát được video trên Mapstudy" width="1907" height="976" />
-          <figcaption>Màn hình lỗi mà một số bạn gặp phải.</figcaption>
-        </figure>
-        <p>Nguyên nhân là do đường truyền mạng ở một số khu vực không ổn định, khiến video không tải và phát được. Đây không phải lỗi từ tài khoản hay bài học của bạn.</p>
-        <p class="alert-cta">Sau đây Mapstudy sẽ hướng dẫn mọi người cách khắc phục.</p>
-      </div>
-    </div>
-  </section>
-
-  <header class="hero">
-    <div class="wrap">
-      <span class="badge"><span class="dot"></span> Hỗ trợ học sinh Mapstudy</span>
-      <h1>Không xem được video? <span class="hl">Xử lý trong 1 phút.</span></h1>
-      <p class="lead">Đôi khi video bị chặn do đường truyền mạng. Dưới đây là <strong>3 cách</strong> đơn giản giúp bạn vào học lại bình thường — chọn cách phù hợp nhất với bạn.</p>
-
-      <nav class="chooser" aria-label="Chọn cách xử lý">
-        <a class="choice" href="#cach-1">
-          <span class="k">Cách 1</span>
-          <span class="t">Dùng 4G / 5G</span>
-          <span class="d">Nhanh nhất, không cài đặt gì</span>
-          <span class="go">Xem ngay</span>
-        </a>
-        <a class="choice" href="#cach-2">
-          <span class="k">Cách 2</span>
-          <span class="t">Phần mềm 1.1.1.1</span>
-          <span class="d">Cloudflare WARP cho máy tính</span>
-          <span class="go">Xem ngay</span>
-        </a>
-        <a class="choice" href="#cach-3">
-          <span class="k">Cách 3</span>
-          <span class="t">Extension Urban VPN</span>
-          <span class="d">Tiện ích cho Chrome &amp; trình duyệt Chromium</span>
-          <span class="go">Xem ngay</span>
-        </a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="wrap">
-
-    <!-- ============ CÁCH 1 ============ -->
-    <section class="method" id="cach-1" data-tone="amber">
-      <div class="m-head">
-        <div class="m-num">1</div>
-        <div>
-          <h2>Sử dụng 4G / 5G để học</h2>
-          <p class="sub">Cách nhanh nhất, không cần cài đặt phần mềm.</p>
-          <span class="tag">Dễ nhất</span>
+        <div class="quick">
+          <span class="ic">📱</span>
+          <p>
+            Thay vì dùng Wi-Fi, hãy <strong>chuyển sang dùng 4G / 5G</strong> để
+            xem video. Cách này áp dụng được cho
+            <strong>cả điện thoại và máy tính</strong>: điện thoại thì tắt Wi-Fi
+            và bật dữ liệu di động; máy tính thì dùng điện thoại phát Wi-Fi (mở
+            điểm phát sóng / hotspot) rồi cho máy tính kết nối vào. Nếu video
+            chạy lại bình thường nghĩa là mạng Wi-Fi đang chặn — bạn cũng có thể
+            dùng tiếp Cách 2 hoặc Cách 3.
+          </p>
         </div>
-      </div>
-      <div class="quick">
-        <span class="ic">📱</span>
-        <p>Thay vì dùng Wi-Fi, hãy <strong>chuyển sang dùng 4G / 5G</strong> để xem video. Cách này áp dụng được cho <strong>cả điện thoại và máy tính</strong>: điện thoại thì tắt Wi-Fi và bật dữ liệu di động; máy tính thì dùng điện thoại phát Wi-Fi (mở điểm phát sóng / hotspot) rồi cho máy tính kết nối vào. Nếu video chạy lại bình thường nghĩa là mạng Wi-Fi đang chặn — bạn cũng có thể dùng tiếp Cách 2 hoặc Cách 3.</p>
-      </div>
-    </section>
+      </section>
 
-    <!-- ============ CÁCH 2 ============ -->
-    <section class="method" id="cach-2" data-tone="default">
-      <div class="m-head">
-        <div class="m-num">2</div>
-        <div>
-          <h2>Phần mềm 1.1.1.1 (Cloudflare WARP)</h2>
-          <p class="sub">Dành cho máy tính Windows / macOS và điện thoại.</p>
+      <!-- ============ CÁCH 2 ============ -->
+      <section class="method" id="cach-2" data-tone="default">
+        <div class="m-head">
+          <div class="m-num">2</div>
+          <div>
+            <h2>Phần mềm 1.1.1.1 (Cloudflare WARP)</h2>
+            <p class="sub">Dành cho máy tính Windows / macOS và điện thoại.</p>
+          </div>
         </div>
-      </div>
 
-      <p class="intro">Phần mềm này giúp người dùng đổi VPN để ngăn chặn việc bị chặn xem video.</p>
-
-      <div class="note">
-        <span class="ic">ℹ️</span>
-        <p>Đang lấy ví dụ cho Windows, các phần mềm khác cài đặt tương tự.</p>
-      </div>
-
-      <div class="card">
-        <ol class="steps">
-          <li class="step">
-            <span class="s-num">1</span>
-            <h3>Tải phần mềm</h3>
-            <p>Truy cập <a href="https://one.one.one.one/" target="_blank" rel="noopener">one.one.one.one</a>, chọn ô tương ứng với thiết bị bạn đang dùng (App Store, Google Play, macOS, Windows hoặc Linux).</p>
-            <div class="grid2">
-              <figure>
-                <img class="shot" loading="lazy" src="images/c2-b1-devices.png" alt="Các ô chọn thiết bị: App Store, Google Play, macOS, Windows, Linux" width="1200" height="478" />
-                <figcaption>Chọn ô đúng với thiết bị của bạn.</figcaption>
-              </figure>
-              <figure>
-                <img class="shot" loading="lazy" src="images/c2-b1-save.png" alt="Hộp thoại Save As để chọn nơi lưu file cài đặt" width="1200" height="836" />
-                <figcaption>Chọn nơi lưu rồi bấm <span class="kbd">Save</span>.</figcaption>
-              </figure>
-            </div>
-          </li>
-
-          <li class="step">
-            <span class="s-num">2</span>
-            <h3>Cài đặt phần mềm</h3>
-            <p>Mở file vừa tải về. Khi hệ thống hỏi cho phép cài đặt, chọn <span class="kbd">Yes</span>.</p>
-            <p>Chờ thanh tiến trình chạy đầy và tự biến mất — lúc này phần mềm đã được cài thành công.</p>
-            <div class="grid2">
-              <figure>
-                <img class="shot" loading="lazy" src="images/c2-b2-allow.png" alt="Cửa sổ User Account Control hỏi cho phép cài đặt, chọn Yes" width="1200" height="900" />
-                <figcaption>Bấm <span class="kbd">Yes</span> để cho phép cài đặt.</figcaption>
-              </figure>
-              <figure>
-                <img class="shot" loading="lazy" src="images/c2-b2-installing.png" alt="Cửa sổ đang cấu hình Cloudflare One Client" width="1200" height="445" />
-                <figcaption>Đang cài đặt — chờ thanh chạy đầy.</figcaption>
-              </figure>
-            </div>
-          </li>
-
-          <li class="step">
-            <span class="s-num">3</span>
-            <h3>Bật phần mềm và kết nối</h3>
-            <p>Mở thanh tìm kiếm của máy, gõ <span class="kbd">Cloudflare One Client</span> rồi chọn <span class="kbd">Open</span> để mở app.</p>
-            <figure>
-              <img class="shot md" loading="lazy" src="images/c2-b3-search.png" alt="Tìm và mở Cloudflare One Client từ ô tìm kiếm Windows" width="1200" height="884" />
-              <figcaption>Tìm rồi mở <em>Cloudflare One Client</em>.</figcaption>
-            </figure>
-            <p style="margin-top:14px">Trong app, bấm ô <span class="kbd">Mode</span> → chọn <span class="kbd">DNS only (HTTPS)</span> → bấm <span class="kbd">Connect</span>.</p>
-            <div class="grid2">
-              <figure>
-                <img class="shot" loading="lazy" src="images/c2-b3-mode.png" alt="Chọn chế độ DNS only HTTPS rồi bấm Connect" width="1200" height="945" />
-                <figcaption>Chọn <strong>DNS only (HTTPS)</strong> rồi <strong>Connect</strong>.</figcaption>
-              </figure>
-              <figure>
-                <img class="shot" loading="lazy" src="images/c2-b3-connected.png" alt="Phần mềm báo Connected" width="1200" height="941" />
-                <figcaption>Báo <strong>Connected</strong> là đã xong — vào Mapstudy xem video bình thường.</figcaption>
-              </figure>
-            </div>
-          </li>
-        </ol>
+        <p class="intro">
+          Phần mềm này giúp người dùng đổi VPN để ngăn chặn việc bị chặn xem
+          video.
+        </p>
 
         <div class="note">
-          <span class="ic">💡</span>
-          <p><strong>Lưu ý:</strong> Bạn <span class="kbd">Connect</span> để xem video bình thường và có thể <span class="kbd">Disconnect</span> sau khi học xong.</p>
+          <span class="ic">ℹ️</span>
+          <p>Đang lấy ví dụ cho Windows, các phần mềm khác cài đặt tương tự.</p>
         </div>
-      </div>
-    </section>
 
-    <!-- ============ CÁCH 3 ============ -->
-    <section class="method" id="cach-3" data-tone="green">
-      <div class="m-head">
-        <div class="m-num">3</div>
-        <div>
-          <h2>Extension Urban VPN trên trình duyệt</h2>
-          <p class="sub">Dùng được trên Chrome và các trình duyệt nhân Chromium.</p>
-          <span class="tag">Cho trình duyệt</span>
+        <div class="card">
+          <ol class="steps">
+            <li class="step">
+              <span class="s-num">1</span>
+              <h3>Tải phần mềm</h3>
+              <p>
+                Truy cập
+                <a
+                  href="https://one.one.one.one/"
+                  target="_blank"
+                  rel="noopener"
+                  >one.one.one.one</a
+                >, chọn ô tương ứng với thiết bị bạn đang dùng (App Store,
+                Google Play, macOS, Windows hoặc Linux).
+              </p>
+              <div class="grid2">
+                <figure>
+                  <img
+                    class="shot"
+                    loading="lazy"
+                    src="images/c2-b1-devices.png"
+                    alt="Các ô chọn thiết bị: App Store, Google Play, macOS, Windows, Linux"
+                    width="1200"
+                    height="478"
+                  />
+                  <figcaption>Chọn ô đúng với thiết bị của bạn.</figcaption>
+                </figure>
+                <figure>
+                  <img
+                    class="shot"
+                    loading="lazy"
+                    src="images/c2-b1-save.png"
+                    alt="Hộp thoại Save As để chọn nơi lưu file cài đặt"
+                    width="1200"
+                    height="836"
+                  />
+                  <figcaption>
+                    Chọn nơi lưu rồi bấm <span class="kbd">Save</span>.
+                  </figcaption>
+                </figure>
+              </div>
+            </li>
+
+            <li class="step">
+              <span class="s-num">2</span>
+              <h3>Cài đặt phần mềm</h3>
+              <p>
+                Mở file vừa tải về. Khi hệ thống hỏi cho phép cài đặt, chọn
+                <span class="kbd">Yes</span>.
+              </p>
+              <p>
+                Chờ thanh tiến trình chạy đầy và tự biến mất — lúc này phần mềm
+                đã được cài thành công.
+              </p>
+              <div class="grid2">
+                <figure>
+                  <img
+                    class="shot"
+                    loading="lazy"
+                    src="images/c2-b2-allow.png"
+                    alt="Cửa sổ User Account Control hỏi cho phép cài đặt, chọn Yes"
+                    width="1200"
+                    height="900"
+                  />
+                  <figcaption>
+                    Bấm <span class="kbd">Yes</span> để cho phép cài đặt.
+                  </figcaption>
+                </figure>
+                <figure>
+                  <img
+                    class="shot"
+                    loading="lazy"
+                    src="images/c2-b2-installing.png"
+                    alt="Cửa sổ đang cấu hình Cloudflare One Client"
+                    width="1200"
+                    height="445"
+                  />
+                  <figcaption>Đang cài đặt — chờ thanh chạy đầy.</figcaption>
+                </figure>
+              </div>
+            </li>
+
+            <li class="step">
+              <span class="s-num">3</span>
+              <h3>Bật phần mềm và kết nối</h3>
+              <p>
+                Mở thanh tìm kiếm của máy, gõ
+                <span class="kbd">Cloudflare One Client</span> rồi chọn
+                <span class="kbd">Open</span> để mở app.
+              </p>
+              <figure>
+                <img
+                  class="shot md"
+                  loading="lazy"
+                  src="images/c2-b3-search.png"
+                  alt="Tìm và mở Cloudflare One Client từ ô tìm kiếm Windows"
+                  width="1200"
+                  height="884"
+                />
+                <figcaption>
+                  Tìm rồi mở <em>Cloudflare One Client</em>.
+                </figcaption>
+              </figure>
+              <p style="margin-top: 14px">
+                Trong app, bấm ô <span class="kbd">Mode</span> → chọn
+                <span class="kbd">DNS only (HTTPS)</span> → bấm
+                <span class="kbd">Connect</span>.
+              </p>
+              <div class="grid2">
+                <figure>
+                  <img
+                    class="shot"
+                    loading="lazy"
+                    src="images/c2-b3-mode.png"
+                    alt="Chọn chế độ DNS only HTTPS rồi bấm Connect"
+                    width="1200"
+                    height="945"
+                  />
+                  <figcaption>
+                    Chọn <strong>DNS only (HTTPS)</strong> rồi
+                    <strong>Connect</strong>.
+                  </figcaption>
+                </figure>
+                <figure>
+                  <img
+                    class="shot"
+                    loading="lazy"
+                    src="images/c2-b3-connected.png"
+                    alt="Phần mềm báo Connected"
+                    width="1200"
+                    height="941"
+                  />
+                  <figcaption>
+                    Báo <strong>Connected</strong> là đã xong — vào Mapstudy xem
+                    video bình thường.
+                  </figcaption>
+                </figure>
+              </div>
+            </li>
+          </ol>
+
+          <div class="note">
+            <span class="ic">💡</span>
+            <p>
+              <strong>Lưu ý:</strong> Bạn <span class="kbd">Connect</span> để
+              xem video bình thường và có thể
+              <span class="kbd">Disconnect</span> sau khi học xong.
+            </p>
+          </div>
         </div>
-      </div>
+      </section>
 
-      <div class="note">
-        <span class="ic">ℹ️</span>
-        <p>Cách này không chỉ dùng cho Google Chrome mà còn áp dụng cho mọi trình duyệt dùng nhân Chromium và cài được tiện ích từ Chrome Web Store, ví dụ: <strong>Cốc Cốc</strong>, <strong>Microsoft Edge</strong>, <strong>Brave</strong>, <strong>Opera</strong>, <strong>Vivaldi</strong>. Đang lấy ví dụ trên Chrome, các trình duyệt khác làm tương tự.</p>
-      </div>
-
-      <div class="card">
-        <ol class="steps">
-          <li class="step">
-            <span class="s-num">1</span>
-            <h3>Mở trang cài extension</h3>
-            <p>Truy cập đường dẫn cài đặt: <a href="https://chromewebstore.google.com/detail/urban-vpn-proxy/eppiocemhmnlbhjplcgkofciiegomcon" target="_blank" rel="noopener">Urban VPN Proxy trên Chrome Web Store</a>.</p>
-            <p>Hoặc vào <a href="https://chromewebstore.google.com/" target="_blank" rel="noopener">chromewebstore.google.com</a> và tìm kiếm <strong>Urban VPN Proxy</strong>.</p>
-          </li>
-
-          <li class="step">
-            <span class="s-num">2</span>
-            <h3>Thêm vào Chrome</h3>
-            <p>Bấm nút <span class="kbd">Thêm vào Chrome</span> để cài đặt tiện ích.</p>
-            <figure>
-              <img class="shot" loading="lazy" src="images/c3-b2-add.png" alt="Trang Urban VPN Proxy với nút Thêm vào Chrome" width="1200" height="800" />
-              <figcaption>Bấm <strong>Thêm vào Chrome</strong>.</figcaption>
-            </figure>
-          </li>
-
-          <li class="step">
-            <span class="s-num">3</span>
-            <h3>Mở và kết nối Urban VPN</h3>
-            <p>Bấm biểu tượng <span class="kbd">ô mảnh ghép</span> cạnh thanh địa chỉ → chọn <strong>Urban VPN Proxy</strong>.</p>
-            <figure>
-              <img class="shot md" loading="lazy" src="images/c3-b3-extensions.png" alt="Mở danh sách extension và chọn Urban VPN Proxy" width="1200" height="382" />
-              <figcaption>Mở danh sách tiện ích → chọn <em>Urban VPN Proxy</em>.</figcaption>
-            </figure>
-            <p style="margin-top:14px">Khi được hỏi quyền, chọn <span class="kbd">Accept</span>. Nếu hiện thông báo, chọn tiếp <span class="kbd">Disable other extension</span>.</p>
-            <div class="grid2">
-              <figure>
-                <img class="shot" loading="lazy" src="images/c3-b3-accept.png" alt="Hộp thoại Want to use Urban VPN, chọn Accept" width="1200" height="980" />
-                <figcaption>Chọn <strong>Accept</strong>.</figcaption>
-              </figure>
-              <figure>
-                <img class="shot" loading="lazy" src="images/c3-b3-disable.png" alt="Thông báo Service interruption, chọn Disable other extension" width="1200" height="980" />
-                <figcaption>Nếu được hỏi, chọn <strong>Disable other extension</strong>.</figcaption>
-              </figure>
-            </div>
-            <p style="margin-top:14px">Ở giao diện chính, bấm ô <span class="kbd">United Kingdom</span> → bấm vào ô tìm kiếm → nhập <span class="kbd">Vietnam</span> → chọn <span class="kbd">Vietnam</span>. Phần mềm sẽ tự kết nối (nếu không tự kết nối, bấm nút play ở dưới).</p>
-            <div class="grid2">
-              <figure>
-                <img class="shot" loading="lazy" src="images/c3-b3-vn.png" alt="Tìm và chọn quốc gia Vietnam trong Urban VPN" width="301" height="584" />
-                <figcaption>Tìm rồi chọn <strong>Vietnam</strong>.</figcaption>
-              </figure>
-              <figure>
-                <img class="shot" loading="lazy" src="images/c3-b3-connected.png" alt="Urban VPN báo Connected với Vietnam" width="304" height="588" />
-                <figcaption>Báo <strong>Connected</strong> là xong — vào Mapstudy học bài.</figcaption>
-              </figure>
-            </div>
-          </li>
-        </ol>
+      <!-- ============ CÁCH 3 ============ -->
+      <section class="method" id="cach-3" data-tone="green">
+        <div class="m-head">
+          <div class="m-num">3</div>
+          <div>
+            <h2>Extension Urban VPN trên trình duyệt</h2>
+            <p class="sub">
+              Dùng được trên Chrome và các trình duyệt nhân Chromium.
+            </p>
+            <span class="tag">Cho trình duyệt</span>
+          </div>
+        </div>
 
         <div class="note">
-          <span class="ic">💡</span>
-          <p><strong>Lưu ý:</strong> Học xong, mở lại tiện ích và chọn <span class="kbd">Pause</span> để mạng chạy nhanh hơn như bình thường.</p>
+          <span class="ic">ℹ️</span>
+          <p>
+            Cách này không chỉ dùng cho Google Chrome mà còn áp dụng cho mọi
+            trình duyệt dùng nhân Chromium và cài được tiện ích từ Chrome Web
+            Store, ví dụ: <strong>Cốc Cốc</strong>,
+            <strong>Microsoft Edge</strong>, <strong>Brave</strong>,
+            <strong>Opera</strong>, <strong>Vivaldi</strong>. Đang lấy ví dụ
+            trên Chrome, các trình duyệt khác làm tương tự.
+          </p>
         </div>
+
+        <div class="card">
+          <ol class="steps">
+            <li class="step">
+              <span class="s-num">1</span>
+              <h3>Mở trang cài extension</h3>
+              <p>
+                Truy cập đường dẫn cài đặt:
+                <a
+                  href="https://chromewebstore.google.com/detail/urban-vpn-proxy/eppiocemhmnlbhjplcgkofciiegomcon"
+                  target="_blank"
+                  rel="noopener"
+                  >Urban VPN Proxy trên Chrome Web Store</a
+                >.
+              </p>
+              <p>
+                Hoặc vào
+                <a
+                  href="https://chromewebstore.google.com/"
+                  target="_blank"
+                  rel="noopener"
+                  >chromewebstore.google.com</a
+                >
+                và tìm kiếm <strong>Urban VPN Proxy</strong>.
+              </p>
+            </li>
+
+            <li class="step">
+              <span class="s-num">2</span>
+              <h3>Thêm vào Chrome</h3>
+              <p>
+                Bấm nút <span class="kbd">Thêm vào Chrome</span> để cài đặt tiện
+                ích.
+              </p>
+              <figure>
+                <img
+                  class="shot"
+                  loading="lazy"
+                  src="images/c3-b2-add.png"
+                  alt="Trang Urban VPN Proxy với nút Thêm vào Chrome"
+                  width="1200"
+                  height="800"
+                />
+                <figcaption>Bấm <strong>Thêm vào Chrome</strong>.</figcaption>
+              </figure>
+            </li>
+
+            <li class="step">
+              <span class="s-num">3</span>
+              <h3>Mở và kết nối Urban VPN</h3>
+              <p>
+                Bấm biểu tượng <span class="kbd">ô mảnh ghép</span> cạnh thanh
+                địa chỉ → chọn <strong>Urban VPN Proxy</strong>.
+              </p>
+              <figure>
+                <img
+                  class="shot md"
+                  loading="lazy"
+                  src="images/c3-b3-extensions1.png"
+                  alt="Mở danh sách extension và chọn Urban VPN Proxy"
+                  width="1200"
+                  height="382"
+                />
+                <figcaption>
+                  Mở danh sách tiện ích → chọn <em>Urban VPN Proxy</em>.
+                </figcaption>
+              </figure>
+              <p style="margin-top: 14px">
+                Khi được hỏi quyền, chọn <span class="kbd">Accept</span>. Nếu
+                hiện thông báo, chọn tiếp
+                <span class="kbd">Disable other extension</span>.
+              </p>
+              <div class="grid2">
+                <figure>
+                  <img
+                    class="shot"
+                    loading="lazy"
+                    src="images/c3-b3-accept.png"
+                    alt="Hộp thoại Want to use Urban VPN, chọn Accept"
+                    width="1200"
+                    height="980"
+                  />
+                  <figcaption>Chọn <strong>Accept</strong>.</figcaption>
+                </figure>
+                <figure>
+                  <img
+                    class="shot"
+                    loading="lazy"
+                    src="images/c3-b3-disable.png"
+                    alt="Thông báo Service interruption, chọn Disable other extension"
+                    width="1200"
+                    height="980"
+                  />
+                  <figcaption>
+                    Nếu được hỏi, chọn <strong>Disable other extension</strong>.
+                  </figcaption>
+                </figure>
+              </div>
+              <p style="margin-top: 14px">
+                Ở giao diện chính, bấm ô
+                <span class="kbd">United Kingdom</span> → bấm vào ô tìm kiếm →
+                nhập <span class="kbd">Vietnam</span> → chọn
+                <span class="kbd">Vietnam</span>. Phần mềm sẽ tự kết nối (nếu
+                không tự kết nối, bấm nút play ở dưới).
+              </p>
+              <div class="grid2">
+                <figure>
+                  <img
+                    class="shot"
+                    loading="lazy"
+                    src="images/c3-b3-vn.png"
+                    alt="Tìm và chọn quốc gia Vietnam trong Urban VPN"
+                    width="301"
+                    height="584"
+                  />
+                  <figcaption>
+                    Tìm rồi chọn <strong>Vietnam</strong>.
+                  </figcaption>
+                </figure>
+                <figure>
+                  <img
+                    class="shot"
+                    loading="lazy"
+                    src="images/c3-b3-connected.png"
+                    alt="Urban VPN báo Connected với Vietnam"
+                    width="304"
+                    height="588"
+                  />
+                  <figcaption>
+                    Báo <strong>Connected</strong> là xong — vào Mapstudy học
+                    bài.
+                  </figcaption>
+                </figure>
+              </div>
+            </li>
+          </ol>
+
+          <div class="note">
+            <span class="ic">💡</span>
+            <p>
+              <strong>Lưu ý:</strong> Học xong, mở lại tiện ích và chọn
+              <span class="kbd">Pause</span> để mạng chạy nhanh hơn như bình
+              thường.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <span>© Mapstudy — Hướng dẫn dành cho học sinh.</span>
+        <a href="#cach-1">↑ Về đầu trang</a>
       </div>
-    </section>
+    </footer>
 
-  </main>
-
-  <footer>
-    <div class="wrap">
-      <span>© Mapstudy — Hướng dẫn dành cho học sinh.</span>
-      <a href="#cach-1">↑ Về đầu trang</a>
+    <!-- Lightbox -->
+    <div class="lb" id="lightbox" aria-hidden="true">
+      <button class="lb-close" id="lbClose" aria-label="Đóng">✕</button>
+      <img id="lbImg" src="" alt="" />
     </div>
-  </footer>
 
-  <!-- Lightbox -->
-  <div class="lb" id="lightbox" aria-hidden="true">
-    <button class="lb-close" id="lbClose" aria-label="Đóng">✕</button>
-    <img id="lbImg" src="" alt="" />
-  </div>
+    <script>
+      (function () {
+        var lb = document.getElementById("lightbox");
+        var lbImg = document.getElementById("lbImg");
+        var close = document.getElementById("lbClose");
 
-  <script>
-    (function () {
-      var lb = document.getElementById('lightbox');
-      var lbImg = document.getElementById('lbImg');
-      var close = document.getElementById('lbClose');
-
-      document.querySelectorAll('.shot').forEach(function (img) {
-        img.addEventListener('click', function () {
-          lbImg.src = img.currentSrc || img.src;
-          lbImg.alt = img.alt;
-          lb.classList.add('open');
-          lb.setAttribute('aria-hidden', 'false');
-          document.body.style.overflow = 'hidden';
+        document.querySelectorAll(".shot").forEach(function (img) {
+          img.addEventListener("click", function () {
+            lbImg.src = img.currentSrc || img.src;
+            lbImg.alt = img.alt;
+            lb.classList.add("open");
+            lb.setAttribute("aria-hidden", "false");
+            document.body.style.overflow = "hidden";
+          });
         });
-      });
 
-      function hide() {
-        lb.classList.remove('open');
-        lb.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-        lbImg.src = '';
-      }
-      lb.addEventListener('click', hide);
-      close.addEventListener('click', hide);
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') hide();
-      });
-    })();
-  </script>
-</body>
+        function hide() {
+          lb.classList.remove("open");
+          lb.setAttribute("aria-hidden", "true");
+          document.body.style.overflow = "";
+          lbImg.src = "";
+        }
+        lb.addEventListener("click", hide);
+        close.addEventListener("click", hide);
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") hide();
+        });
+      })();
+    </script>
+  </body>
 </html>
