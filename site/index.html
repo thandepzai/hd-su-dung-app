@@ -155,6 +155,8 @@
     .m-head h2 { font-size: clamp(1.4rem, 1rem + 2vw, 2rem); line-height: 1.15; letter-spacing: -0.01em; margin: 2px 0 4px; }
     .m-head .sub { color: var(--muted); font-size: 0.95rem; margin: 0; }
 
+    .intro { margin: 0 0 18px; color: var(--ink-soft); font-size: 1rem; }
+
     .tag {
       display: inline-block; margin-top: 6px;
       font-size: 0.74rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
@@ -254,6 +256,29 @@
     .note .ic { flex: none; }
     .note strong { color: #0a4a29; }
 
+    /* ---------- Alert / announcement ---------- */
+    .alert { padding-block: clamp(2rem, 1.4rem + 2vw, 3.2rem) 0; }
+    .alert-card {
+      background: linear-gradient(135deg, #fff7ed, var(--surface));
+      border: 1px solid #ffd9b0;
+      border-left: 5px solid var(--accent);
+      border-radius: var(--radius-lg);
+      padding: clamp(20px, 1rem + 2.5vw, 32px);
+      box-shadow: var(--shadow-card);
+    }
+    .alert-head { display: flex; align-items: flex-start; gap: 14px; }
+    .alert-ic { flex: none; font-size: 1.8rem; line-height: 1; }
+    .alert-kicker {
+      display: inline-block;
+      font-size: 0.74rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 999px;
+      background: var(--accent-tint); color: #b4520a;
+    }
+    .alert-head h2 { margin: 8px 0 0; font-size: clamp(1.2rem, 0.9rem + 1.4vw, 1.6rem); line-height: 1.25; color: var(--ink); }
+    .alert-figure { margin: 18px 0 0; }
+    .alert p { color: var(--ink-soft); margin: 14px 0 0; }
+    .alert .alert-cta { font-weight: 600; color: var(--ink); }
+
     /* ---------- Footer ---------- */
     footer {
       border-top: 1px solid var(--line);
@@ -291,6 +316,26 @@
 </head>
 <body>
 
+  <section class="alert" aria-labelledby="alert-heading">
+    <div class="wrap">
+      <div class="alert-card">
+        <div class="alert-head">
+          <span class="alert-ic">⚠️</span>
+          <div>
+            <span class="alert-kicker">Thông báo</span>
+            <h2 id="alert-heading">Ngày 24 có một số học sinh gặp lỗi không xem được video như sau</h2>
+          </div>
+        </div>
+        <figure class="alert-figure">
+          <img class="shot" loading="eager" src="images/error.png" alt="Màn hình báo lỗi không phát được video trên Mapstudy" width="1907" height="976" />
+          <figcaption>Màn hình lỗi mà một số bạn gặp phải.</figcaption>
+        </figure>
+        <p>Nguyên nhân là do đường truyền mạng ở một số khu vực không ổn định, khiến video không tải và phát được. Đây không phải lỗi từ tài khoản hay bài học của bạn.</p>
+        <p class="alert-cta">Sau đây Mapstudy sẽ hướng dẫn mọi người cách khắc phục.</p>
+      </div>
+    </div>
+  </section>
+
   <header class="hero">
     <div class="wrap">
       <span class="badge"><span class="dot"></span> Hỗ trợ học sinh Mapstudy</span>
@@ -313,7 +358,7 @@
         <a class="choice" href="#cach-3">
           <span class="k">Cách 3</span>
           <span class="t">Extension Urban VPN</span>
-          <span class="d">Tiện ích cho trình duyệt Chrome</span>
+          <span class="d">Tiện ích cho Chrome &amp; trình duyệt Chromium</span>
           <span class="go">Xem ngay</span>
         </a>
       </nav>
@@ -334,7 +379,7 @@
       </div>
       <div class="quick">
         <span class="ic">📱</span>
-        <p>Tắt Wi-Fi và <strong>chuyển sang dùng 4G / 5G</strong> trên điện thoại để xem video. Nếu video chạy lại bình thường nghĩa là mạng Wi-Fi đang chặn — bạn có thể dùng tiếp Cách 2 hoặc Cách 3 cho máy tính.</p>
+        <p>Thay vì dùng Wi-Fi, hãy <strong>chuyển sang dùng 4G / 5G</strong> để xem video. Cách này áp dụng được cho <strong>cả điện thoại và máy tính</strong>: điện thoại thì tắt Wi-Fi và bật dữ liệu di động; máy tính thì dùng điện thoại phát Wi-Fi (mở điểm phát sóng / hotspot) rồi cho máy tính kết nối vào. Nếu video chạy lại bình thường nghĩa là mạng Wi-Fi đang chặn — bạn cũng có thể dùng tiếp Cách 2 hoặc Cách 3.</p>
       </div>
     </section>
 
@@ -345,8 +390,14 @@
         <div>
           <h2>Phần mềm 1.1.1.1 (Cloudflare WARP)</h2>
           <p class="sub">Dành cho máy tính Windows / macOS và điện thoại.</p>
-          <span class="tag">Khuyên dùng cho máy tính</span>
         </div>
+      </div>
+
+      <p class="intro">Phần mềm này giúp người dùng đổi VPN để ngăn chặn việc bị chặn xem video.</p>
+
+      <div class="note">
+        <span class="ic">ℹ️</span>
+        <p>Đang lấy ví dụ cho Windows, các phần mềm khác cài đặt tương tự.</p>
       </div>
 
       <div class="card">
@@ -400,7 +451,7 @@
               </figure>
               <figure>
                 <img class="shot" loading="lazy" src="images/c2-b3-connected.png" alt="Phần mềm báo Connected" width="1200" height="941" />
-                <figcaption>Báo <strong>Connected</strong> là đã xong — vào Mapstudy học bài.</figcaption>
+                <figcaption>Báo <strong>Connected</strong> là đã xong — vào Mapstudy xem video bình thường.</figcaption>
               </figure>
             </div>
           </li>
@@ -408,7 +459,7 @@
 
         <div class="note">
           <span class="ic">💡</span>
-          <p><strong>Lưu ý:</strong> Học xong, mở lại phần mềm và chọn <span class="kbd">Disconnect</span> để mạng chạy nhanh hơn như bình thường.</p>
+          <p><strong>Lưu ý:</strong> Bạn <span class="kbd">Connect</span> để xem video bình thường và có thể <span class="kbd">Disconnect</span> sau khi học xong.</p>
         </div>
       </div>
     </section>
@@ -418,10 +469,15 @@
       <div class="m-head">
         <div class="m-num">3</div>
         <div>
-          <h2>Extension Urban VPN trên Chrome</h2>
-          <p class="sub">Dành cho học sinh dùng trình duyệt Google Chrome.</p>
+          <h2>Extension Urban VPN trên trình duyệt</h2>
+          <p class="sub">Dùng được trên Chrome và các trình duyệt nhân Chromium.</p>
           <span class="tag">Cho trình duyệt</span>
         </div>
+      </div>
+
+      <div class="note">
+        <span class="ic">ℹ️</span>
+        <p>Cách này không chỉ dùng cho Google Chrome mà còn áp dụng cho mọi trình duyệt dùng nhân Chromium và cài được tiện ích từ Chrome Web Store, ví dụ: <strong>Cốc Cốc</strong>, <strong>Microsoft Edge</strong>, <strong>Brave</strong>, <strong>Opera</strong>, <strong>Vivaldi</strong>. Đang lấy ví dụ trên Chrome, các trình duyệt khác làm tương tự.</p>
       </div>
 
       <div class="card">
@@ -462,14 +518,14 @@
                 <figcaption>Nếu được hỏi, chọn <strong>Disable other extension</strong>.</figcaption>
               </figure>
             </div>
-            <p style="margin-top:14px">Ở giao diện chính, bấm ô <span class="kbd">United States (USA)</span> → chọn <span class="kbd">Germany</span>. Phần mềm sẽ tự kết nối (nếu không tự kết nối, bấm nút play ở dưới).</p>
+            <p style="margin-top:14px">Ở giao diện chính, bấm ô <span class="kbd">United Kingdom</span> → bấm vào ô tìm kiếm → nhập <span class="kbd">Vietnam</span> → chọn <span class="kbd">Vietnam</span>. Phần mềm sẽ tự kết nối (nếu không tự kết nối, bấm nút play ở dưới).</p>
             <div class="grid2">
               <figure>
-                <img class="shot" loading="lazy" src="images/c3-b3-germany.png" alt="Chọn quốc gia Germany trong Urban VPN" width="1200" height="980" />
-                <figcaption>Đổi sang <strong>Germany</strong>.</figcaption>
+                <img class="shot" loading="lazy" src="images/c3-b3-vn.png" alt="Tìm và chọn quốc gia Vietnam trong Urban VPN" width="301" height="584" />
+                <figcaption>Tìm rồi chọn <strong>Vietnam</strong>.</figcaption>
               </figure>
               <figure>
-                <img class="shot" loading="lazy" src="images/c3-b3-connected.png" alt="Urban VPN báo Connected với Germany" width="1200" height="980" />
+                <img class="shot" loading="lazy" src="images/c3-b3-connected.png" alt="Urban VPN báo Connected với Vietnam" width="304" height="588" />
                 <figcaption>Báo <strong>Connected</strong> là xong — vào Mapstudy học bài.</figcaption>
               </figure>
             </div>
